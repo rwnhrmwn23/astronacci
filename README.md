@@ -78,6 +78,13 @@ The app demonstrates how to integrate Firebase Authentication for handling email
 ### Search Functionality
 
 - On the HomePage, users can search through a list of registered users.
+
+## Additional Features
+
+- **Password Hashing**: The app hashes the password before storing or using it for authentication purposes, enhancing security.
+- **Logout**: A utility function that allows the user to log out securely, clearing session data from shared preferences.
+- **Firebase Realtime Database Storage**: Profile names and images are stored as base64 strings in Firebase Realtime Database, ensuring that all users can access their data securely.
+- **Error Handling**: Built-in error handling for scenarios like failed authentication, invalid emails, and failed password resets, using Bloc’s state management for showing error messages.
   
 ## Firebase Integration
 
@@ -119,13 +126,6 @@ The app utilizes several Flutter plugins for smooth functionality:
 
 ### 9. `equatable: ^2.0.3`
    - Ensures simple equality comparisons between states and events in Bloc.
-
-## Additional Features
-
-- **Password Hashing**: The app hashes the password before storing or using it for authentication purposes, enhancing security.
-- **Logout**: A utility function that allows the user to log out securely, clearing session data from shared preferences.
-- **Firebase Realtime Database Storage**: Profile names and images are stored as base64 strings in Firebase Realtime Database, ensuring that all users can access their data securely.
-- **Error Handling**: Built-in error handling for scenarios like failed authentication, invalid emails, and failed password resets, using Bloc’s state management for showing error messages.
 
 ## Conclusion
 
