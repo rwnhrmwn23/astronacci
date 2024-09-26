@@ -11,7 +11,6 @@ class ForgotPasswordBloc extends Bloc<ForgotPasswordEvent, ForgotPasswordState> 
     on<ForgotPasswordSubmitEvent>((event, emit) async {
       emit(ForgotPasswordSubmittingState());
       try {
-        // Kirim email reset password ke Firebase Auth
         await _auth.sendPasswordResetEmail(email: event.email);
         emit(ForgotPasswordSuccessState());
       } catch (e) {
