@@ -2,10 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../blocs/home/home_bloc.dart';
-import '../blocs/home/home_event.dart';
+
+import '../../common/utils.dart';
+import '../home/blocs/home_bloc.dart';
+import '../home/blocs/home_event.dart';
 
 class EditProfileEmailPage extends StatefulWidget {
+  const EditProfileEmailPage({super.key});
+
   @override
   _EditProfileEmailPageState createState() => _EditProfileEmailPageState();
 }
@@ -57,12 +61,12 @@ class _EditProfileEmailPageState extends State<EditProfileEmailPage> {
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
-              title: Text('Email Verification'),
-              content: Text(
+              title: const Text('Email Verification'),
+              content: const Text(
                   'Periksa email baru Anda untuk memverifikasi perubahan email.'),
               actions: [
                 TextButton(
-                  child: Text('OK'),
+                  child: const Text('OK'),
                   onPressed: () async {
                     SharedPreferences prefs = await SharedPreferences.getInstance();
                     await prefs.remove('userID');
@@ -77,9 +81,7 @@ class _EditProfileEmailPageState extends State<EditProfileEmailPage> {
       }
     } catch (e) {
       // Tampilkan pesan error jika proses gagal
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Failed to update email: $e')),
-      );
+      showSnackBar(context, 'Failed to update email: $e');
     }
   }
 
@@ -87,7 +89,7 @@ class _EditProfileEmailPageState extends State<EditProfileEmailPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ubah Email'),
+        title: const Text('Ubah Email'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -96,31 +98,29 @@ class _EditProfileEmailPageState extends State<EditProfileEmailPage> {
             // Input field untuk email baru
             TextField(
               controller: emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Email Baru',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
-
+            const SizedBox(height: 16),
             // Input field untuk password saat ini
             TextField(
               controller: passwordController,
               obscureText: true,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 labelText: 'Password Sekarang',
                 border: OutlineInputBorder(),
               ),
             ),
-            SizedBox(height: 16),
-
+            const SizedBox(height: 16),
             // Tombol untuk submit perubahan email
             ElevatedButton(
               onPressed: _updateEmail,
-              child: Text('Submit'),
               style: ElevatedButton.styleFrom(
-                minimumSize: Size(double.infinity, 50),
+                minimumSize: const Size(double.infinity, 50),
               ),
+              child: const Text('Submit'),
             ),
           ],
         ),

@@ -1,5 +1,6 @@
-import 'package:flutter/material.dart';
+import 'package:astronacci/common/utils.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 
 class EditProfilePasswordPage extends StatefulWidget {
   @override
@@ -22,15 +23,11 @@ class _EditProfilePasswordPage extends State<EditProfilePasswordPage> {
         User? user = FirebaseAuth.instance.currentUser;
         if (user != null) {
           await user.updatePassword(passwordController.text);
-          ScaffoldMessenger.of(context).showSnackBar(
-            SnackBar(content: Text('Password berhasil diubah')),
-          );
-          Navigator.of(context).pop(); // Kembali ke halaman sebelumnya
+          showSnackBar(context, 'Password berhasil diubah');
+          Navigator.of(context).pop();
         }
       } catch (e) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(content: Text('Gagal mengubah password: $e')),
-        );
+        showSnackBar(context, 'Gagal mengubah password: $e');
       }
 
       setState(() {
@@ -43,7 +40,7 @@ class _EditProfilePasswordPage extends State<EditProfilePasswordPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Ubah Password'),
+        title: const Text('Ubah Password'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -54,7 +51,7 @@ class _EditProfilePasswordPage extends State<EditProfilePasswordPage> {
             children: [
               TextFormField(
                 controller: passwordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Password Baru',
                   border: OutlineInputBorder(),
                 ),
@@ -69,10 +66,10 @@ class _EditProfilePasswordPage extends State<EditProfilePasswordPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               TextFormField(
                 controller: confirmPasswordController,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   labelText: 'Konfirmasi Password',
                   border: OutlineInputBorder(),
                 ),
@@ -87,12 +84,12 @@ class _EditProfilePasswordPage extends State<EditProfilePasswordPage> {
                   return null;
                 },
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               _isLoading
-                  ? Center(child: CircularProgressIndicator())
+                  ? const Center(child: CircularProgressIndicator())
                   : ElevatedButton(
                 onPressed: _updatePassword,
-                child: Text('Simpan Password'),
+                child: const Text('Simpan Password'),
               ),
             ],
           ),

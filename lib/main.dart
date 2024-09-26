@@ -1,13 +1,13 @@
-import 'package:astronacci/ui/home_page.dart';
-import 'package:astronacci/ui/register_page.dart';
+import 'package:astronacci/feature/home/ui/home_page.dart';
+import 'package:astronacci/feature/register/ui/register_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'blocs/home/home_bloc.dart';
-import 'ui/forgot_password_page.dart';
-import 'ui/login_page.dart';
+import 'feature/forgot_password/ui/forgot_password_page.dart';
+import 'feature/home/blocs/home_bloc.dart';
+import 'feature/login/ui/login_page.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

@@ -1,13 +1,15 @@
-import 'dart:convert'; // Untuk base64 decoding
+import 'dart:convert';
 import 'dart:io';
+import 'package:astronacci/common/utils.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_cropper/image_cropper.dart'; // Tambahkan ImageCropper
+import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../blocs/home/home_bloc.dart';
-import '../blocs/home/home_event.dart';
-import '../blocs/home/home_state.dart';
+
+import '../home/blocs/home_bloc.dart';
+import '../home/blocs/home_event.dart';
+import '../home/blocs/home_state.dart';
 
 class EditProfilePage extends StatefulWidget {
   final Map<String, dynamic> user;
@@ -80,19 +82,15 @@ class _EditProfilePageState extends State<EditProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Edit Profile'),
+        title: const Text('Edit Profile'),
       ),
       body: BlocConsumer<HomeBloc, HomeState>(
         listener: (context, state) {
           if (state is HomeLoadedState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Profile updated successfully!')),
-            );
-            Navigator.of(context).pop(true); // Indikasi berhasil di-update
+            showSnackBar(context, 'Profile updated successfully!');
+            Navigator.of(context).pop(true);
           } else if (state is HomeErrorState) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(content: Text('Failed to update profile: ${state.message}')),
-            );
+            showSnackBar(context, 'Failed to update profile: ${state.message}');
           }
         },
         builder: (context, state) {
@@ -114,19 +112,19 @@ class _EditProfilePageState extends State<EditProfilePage> {
                       child: _imageFile == null &&
                           (widget.user['profileImage'] == null ||
                               widget.user['profileImage'] == "")
-                          ? Icon(Icons.person, size: 50)
+                          ? const Icon(Icons.person, size: 50)
                           : null,
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   TextField(
                     controller: nameController,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       labelText: 'Name',
                       border: OutlineInputBorder(),
                     ),
                   ),
-                  SizedBox(height: 16),
+                  const SizedBox(height: 16),
                   ElevatedButton(
                     onPressed: () {
                       SharedPreferences.getInstance().then((prefs) {
@@ -142,10 +140,10 @@ class _EditProfilePageState extends State<EditProfilePage> {
                         }
                       });
                     },
-                    child: Text('Save Changes'),
                     style: ElevatedButton.styleFrom(
-                      minimumSize: Size(double.infinity, 50),
+                      minimumSize: const Size(double.infinity, 50),
                     ),
+                    child: const Text('Save Changes'),
                   ),
                 ],
               ),
