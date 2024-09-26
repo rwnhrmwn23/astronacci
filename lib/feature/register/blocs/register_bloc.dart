@@ -5,7 +5,6 @@ import 'package:firebase_database/firebase_database.dart';
 import 'package:flutter/material.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 import 'register_event.dart';
 
@@ -73,10 +72,6 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
             'name': event.name,
             'profileImage': (imageBase64 != null && imageBase64.isNotEmpty) ? imageBase64 : "", // Tambahkan gambar jika ada
           });
-
-          // Simpan userID ke SharedPreferences
-          SharedPreferences prefs = await SharedPreferences.getInstance();
-          await prefs.setString('userID', userID);
 
           // Emit sukses setelah registrasi dan email verifikasi dikirim
           emit(FormSubmittedState());
