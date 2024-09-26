@@ -55,7 +55,7 @@ class RegisterBloc extends Bloc<RegisterEvent, RegisterState> {
         FirebaseAuth auth = FirebaseAuth.instance;
         UserCredential userCredential = await auth.createUserWithEmailAndPassword(
           email: event.email,
-          password: event.password, // Password langsung digunakan tanpa hash karena Firebase Auth akan meng-hash password
+          password: event.password,
         );
 
         User? user = userCredential.user;
